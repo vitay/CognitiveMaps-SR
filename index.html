@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="generator" content="pandoc">
-  <meta name="author" content="Author name">
-  <title>Title of the presentation</title>
+  <meta name="author" content="Julien Vitay">
+  <title>Cognitive maps and successor representations</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -36,26 +36,1092 @@
 
 <section>
     <figure>
-    <img src="img/tuc-new.png" style="width:35%;" />
+    <img src="img/tuc-new.png" style="width:30%; margin-bottom: 1em;" />
   </figure>
-    <h1 class="title">Title of the presentation</h1>
-  <p class="subtitle">Subtitle</p>
-  <p class="author">Author name</p>
-  <p class="date">Institution</p>
+    <h1 class="title">Cognitive maps and successor representations</h1>
+  <p class="author">Julien Vitay</p>
+  <p class="date">AI lab - TU Chemnitz</p>
 </section>
 
-<section id="first-slide" class="slide level1">
-<h1>First slide</h1>
-<ul>
-<li>Test</li>
-</ul>
-<p><span class="math display">\[\dfrac{a}{b} = 2\]</span></p>
+<section id="plan" class="slide level1">
+<h1>Plan</h1>
+<ol type="1">
+<li><p>Cognitive maps</p>
+<ol type="1">
+<li><p>Cognitive maps</p></li>
+<li><p>Allocentric vs. egocentric navigation</p></li>
+<li><p>Goal-directed learning vs habitual behavior</p></li>
+</ol></li>
+<li><p>Successor representations</p>
+<ol type="1">
+<li><p>Model-free vs. Model-based</p></li>
+<li><p>Successor representations</p></li>
+<li><p>Successor features</p></li>
+</ol></li>
+<li><p>Neurobiological support for the SR hypothesis</p>
+<ol type="1">
+<li><p>Stachenfeld et al. (2017). The hippocampus as a predictive map.</p></li>
+<li><p>Momennejad et al. (2017). The successor representation in human reinforcement learning.</p></li>
+<li><p>Geerts et al. (2020). A general model of hippocampal and dorsal striatal learning and decision making.</p></li>
+</ol></li>
+</ol>
 </section>
-<section id="second-slide" class="slide level1">
-<h1>Second slide</h1>
+<section id="cognitive-maps" class="slide level1">
+<h1>1 - Cognitive maps</h1>
+</section>
+<section id="cognitive-maps-in-the-hippocampus" class="slide level1">
+<h1>Cognitive maps in the hippocampus</h1>
+    <div id="col-wrapper">
+      <div id="col">
+        <div style="width:50%; float: left;">
 <ul>
-<li>Test</li>
+<li><p>Cognitive maps (Tolman, 1948) denote the ability to extract <strong>relational knowledge</strong> about objects or places and use it to flexibly adapt behavior.</p></li>
+<li><p>This relational knowledge can even be learned in the absence of rewards (implicit or <strong>latent learning</strong>).</p></li>
+<li><p>Cognitive maps have been linked to the hippocampus in spatial navigation tasks (<strong>place cells</strong>), but also in non-spatial cognitive tasks.</p>
+<ul>
+<li>transitive inference (A &gt; B and B &gt; C <span class="math inline">\(\rightarrow\)</span> A &gt; C)</li>
+<li>temporal order, causality</li>
+<li>social hierarchies</li>
+<li>generalization</li>
+</ul></li>
+<li><p>Abstract concepts can be represented in 1D or 2D maps, and neural firing in the hippocampal-entorhinal formation can be decoded accordingly.</p></li>
 </ul>
+        </div>
+        <div style="width:50%; float:right;">
+<p><img data-src="img/tolman.png" /></p>
+<p><img data-src="img/placecell.png" style="width:80.0%" /></p>
+        </div>
+      </div>
+    </div>
+
+    <p class=citation>
+         Tolman, EC. Cognitive maps in rats and men. American Psychological Association; 1948.
+    </p>
+    
+
+    <p class=citation>
+         O’Keefe, J, Nadel, L. The hippocampus as a cognitive map. Oxford: Clarendon Press; 1978.
+    </p>
+    
+</section>
+<section id="hippocampal-zoo" class="slide level1">
+<h1>Hippocampal zoo</h1>
+<p><img data-src="img/hippocampalzoo.png" style="width:70.0%" /></p>
+
+    <p class=citation>
+         Behrens, T. E. J., Muller, T. H., Whittington, J. C. R., Mark, S., Baram, A. B., Stachenfeld, K. L., et al. (2018). What Is a Cognitive Map? Organizing Knowledge for Flexible Behavior. Neuron 100, 490–509. doi:10.1016/j.neuron.2018.10.002.
+    </p>
+    
+</section>
+<section id="reinforcement-learning-in-the-basal-ganglia" class="slide level1">
+<h1>Reinforcement learning in the basal ganglia</h1>
+    <div id="col-wrapper">
+      <div id="col">
+        <div style="width:60%; float: left;">
+<ul>
+<li><p><strong>Reward-guided learning</strong>, reinforcement learning (RL) or operant conditioning rely mostly on the basal ganglia (BG), which learns to associate actions to expected rewards.</p></li>
+<li><p>Dopamine (DA) released by VTA and SNC represents <strong>reward prediction error</strong> that drives learning in the BG:</p>
+<ul>
+<li>Surprisingly good actions are reinforced, surprisingly bad ones are avoided.</li>
+</ul></li>
+<li><p>The BG is structured in three main parallel (but communicating) loops with the cortex:</p>
+<ul>
+<li><p>The <strong>limbic loop</strong> through the ventral striatum is involved in learning the motivational value of outcomes and their predictors.</p></li>
+<li><p>The <strong>associative loop</strong> through the DMS learns to select plans towards an outcome and maintain the relevant information into the WM.</p></li>
+<li><p>The <strong>sensorimotor loop</strong> through the DLS learns to select actions that lead to a particular outcome.</p></li>
+</ul></li>
+</ul>
+        </div>
+        <div style="width:40%; float:right;">
+<p><img data-src="img/limbicloop.png" /></p>
+        </div>
+      </div>
+    </div>
+
+    <p class=citation>
+         Source: https://www.researchgate.net/figure/Neurobiological-correlates-of-model-free-and-model-based-reinforcement-learning-The-key_fig1_291372033
+    </p>
+    
+</section>
+<section id="allocentric-vs.-egocentric-navigation" class="slide level1">
+<h1>Allocentric vs. egocentric navigation</h1>
+    <div id="col-wrapper">
+      <div id="col">
+        <div style="width:50%; float: left;">
+<ul>
+<li><p>Two strategies are observed in navigational tasks, depending on familiarity:</p>
+<ul>
+<li><p>Place strategy (allocentric) relies on a spatial cognitive map (place cells).</p></li>
+<li><p>Response strategy (egocentric) relies on S-R associations.</p></li>
+</ul></li>
+<li><p>The response strategy becomes dominant with overtraining, as it is computationally more efficient, but slower to build up.</p></li>
+<li><p>The place strategy is hippocampus-dependent, while the response strategy is BG-dependent.</p></li>
+</ul>
+        </div>
+        <div style="width:50%; float:right;">
+<p><img data-src="img/plusmaze.jpg" /></p>
+        </div>
+      </div>
+    </div>
+
+    <p class=citation>
+         Geerts, J. P., Chersi, F., Stachenfeld, K. L., and Burgess, N. (2020). A general model of hippocampal and dorsal striatal learning and decision making. PNAS 117, 31427–31437. doi:10.1073/pnas.2007981117.
+    </p>
+    
+</section>
+<section id="goal-directed-learning-vs.-habitual-behavior" class="slide level1">
+<h1>Goal-directed learning vs. habitual behavior</h1>
+<ul>
+<li><p><strong>Goal-directed</strong> behavior learns R <span class="math inline">\(\rightarrow\)</span> O associations.</p>
+<ul>
+<li><p>“What should I do in order to obtain this outcome?”</p></li>
+<li><p>Sensible to outcome revaluation.</p></li>
+</ul></li>
+<li><p><strong>Habits</strong> are developed by overtraining S <span class="math inline">\(\rightarrow\)</span> R associations.</p>
+<ul>
+<li><p>“I always do this in this situation.”</p></li>
+<li><p>Not sensible to outcome revaluation.</p></li>
+</ul></li>
+</ul>
+<p><img data-src="img/rewarddevaluation.jpg" style="width:70.0%" /></p>
+
+    <p class=citation>
+         Credits: Bernard W. Balleine
+    </p>
+    
+</section>
+<section id="two-competing-systems" class="slide level1">
+<h1>Two competing systems</h1>
+<ul>
+<li><p>There seems to be two competing systems for action control:</p>
+<ul>
+<li><p>One cognitive and flexible system, actively planning the future.</p></li>
+<li><p>One habitual system abstracting and caching future outcomes.</p></li>
+</ul></li>
+</ul>
+<p><img data-src="img/mfmb.png" /></p>
+<ul>
+<li><p>The open question is the arbitration mechanism between these two segregated processes: who takes control when?</p></li>
+<li><p>Recent work suggests both systems are largely overlapping. See also Javier’s model.</p></li>
+</ul>
+
+    <p class=citation>
+         Doll, B. B., Simon, D. A., and Daw, N. D. (2012). The ubiquity of model-based reinforcement learning. Current Opinion in Neurobiology 22, 1075–1081. doi:10.1016/j.conb.2012.08.003.
+    </p>
+    
+
+    <p class=citation>
+         Miller, K., Ludvig, E. A., Pezzulo, G., and Shenhav, A. (2018). Re-aligning models of habitual and goal-directed decision-making, in Goal-Directed Decision Making : Computations and Neural Circuits, eds. A. Bornstein, R. W. Morris, and A. Shenhav (Academic Press)
+    </p>
+    
+</section>
+<section id="reinforcement-learning" class="slide level1">
+<h1>2 - Reinforcement learning</h1>
+</section>
+<section id="model-based-vs.-model-free" class="slide level1">
+<h1>Model-based vs. Model-free</h1>
+<ul>
+<li>Model-free methods use the <strong>reward prediction error</strong> (RPE) to update values:</li>
+</ul>
+<p><span class="math display">\[
+    \delta_t = r_{t+1} + \gamma \, V^\pi(s_{t+1}) - V^\pi(s_t)
+\]</span></p>
+<p><span class="math display">\[
+    \Delta V^\pi(s_t) = \alpha \, \delta_t
+\]</span></p>
+<ul>
+<li>Encountered rewards propagate very slowly to all states and actions.</li>
+</ul>
+<p><img data-src="img/gridworld-lambda.png" style="width:70.0%" /></p>
+<ul>
+<li><p>If the environment changes (transition probabilities, rewards), they have to relearn everything.</p></li>
+<li><p>After training, selecting an action is very fast.</p></li>
+</ul>
+</section>
+<section id="model-based-vs.-model-free-1" class="slide level1">
+<h1>Model-based vs. Model-free</h1>
+<ul>
+<li>Model-based RL can learn very fast changes in the transition or reward distributions:</li>
+</ul>
+<p><span class="math display">\[
+    \Delta r(s_t, a_t, s_{t+1}) = \alpha \, (r_{t+1} - r(s_t, a_t, s_{t+1}))
+\]</span></p>
+<p><span class="math display">\[
+    \Delta p(s&#39; | s_t, a_t) = \alpha \, (\mathbb{I}(s_{t+1} = s&#39;) - p(s&#39; | s_t, a_t))
+\]</span></p>
+<ul>
+<li>But selecting an action requires planning in the tree of possibilities (slow).</li>
+</ul>
+<p><img data-src="img/modelbased-tree.png" style="width:70.0%" /></p>
+</section>
+<section id="model-based-vs.-model-free-2" class="slide level1">
+<h1>Model-based vs. Model-free</h1>
+<ul>
+<li>Relative advantages of MF and MB methods:</li>
+</ul>
+<p><br></p>
+<table>
+<colgroup>
+<col style="width: 19%" />
+<col style="width: 15%" />
+<col style="width: 21%" />
+<col style="width: 21%" />
+<col style="width: 21%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th style="text-align: left;">Inference speed</th>
+<th style="text-align: left;">Sample complexity</th>
+<th style="text-align: left;">Optimality</th>
+<th style="text-align: left;">Flexibility</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Model-free</td>
+<td style="text-align: left;">fast</td>
+<td style="text-align: left;">high</td>
+<td style="text-align: left;">yes</td>
+<td style="text-align: left;">no</td>
+</tr>
+<tr class="even">
+<td>Model-based</td>
+<td style="text-align: left;">slow</td>
+<td style="text-align: left;">low</td>
+<td style="text-align: left;">as good as the model</td>
+<td style="text-align: left;">yes</td>
+</tr>
+</tbody>
+</table>
+<p><br></p>
+<ul>
+<li>A trade-off would be nice… Most MB models in the deep RL literature are hybrid MB/MF models anyway.</li>
+</ul>
+</section>
+<section id="successor-representations-sr" class="slide level1">
+<h1>Successor Representations (SR)</h1>
+<ul>
+<li>Successor representations (SR) have been introduced to combine MF and MB properties. Let’s split the definition of the value of a state:</li>
+</ul>
+<p><span class="math display">\[
+\begin{align}
+    V^\pi(s) &amp;= \mathbb{E}_{\pi} [\sum_{k=0}^\infty \gamma^k \, r_{t+k+1} | s_t =s] \\
+            &amp;\\
+               &amp;= \mathbb{E}_{\pi} [\begin{bmatrix} 1 \\ \gamma \\ \gamma^2 \\ \ldots \\ \gamma^\infty \end{bmatrix} \times
+                  \begin{bmatrix} \mathbb{I}(s_{t}) \\ \mathbb{I}(s_{t+1}) \\ \mathbb{I}(s_{t+2}) \\ \ldots \\ \mathbb{I}(s_{\infty}) \end{bmatrix}  \times
+                  \begin{bmatrix} r_{t+1} \\ r_{t+2} \\ r_{t+3} \\ \ldots \\ r_{t+\infty} \end{bmatrix} 
+                | s_t =s]\\
+\end{align}
+\]</span></p>
+<p>where <span class="math inline">\(\mathbb{I}(s_{t})\)</span> is 1 when the agent is in <span class="math inline">\(s_t\)</span> at time <span class="math inline">\(t\)</span>, 0 otherwise.</p>
+<ul>
+<li><p>The left part corresponds to the <strong>transition dynamics</strong>: which states will be visited by the policy, discounted by <span class="math inline">\(\gamma\)</span>.</p></li>
+<li><p>The right part corresponds to the <strong>immediate reward</strong> in each visited state.</p></li>
+<li><p>Couldn’t we learn the transition dynamics and the reward distribution separately in a model-free manner?</p></li>
+</ul>
+
+    <p class=citation>
+         Dayan, P. (1993). Improving Generalization for Temporal Difference Learning: The Successor Representation. Neural Computation 5, 613–624. doi:10.1162/neco.1993.5.4.613.
+    </p>
+    
+</section>
+<section id="successor-representations-sr-1" class="slide level1">
+<h1>Successor Representations (SR)</h1>
+<ul>
+<li>SR rewrites the value of a state into an <strong>expected discounted future state occupancy</strong> and an <strong>expected immediate reward</strong> by summing over all possible states <span class="math inline">\(s&#39;\)</span> of the MDP:</li>
+</ul>
+<p><span class="math display">\[
+\begin{align}
+    V^\pi(s) &amp;= \mathbb{E}_{\pi} [\sum_{k=0}^\infty \gamma^k \, r_{t+k+1} | s_t =s] \\
+               &amp;= \sum_{s&#39; \in \mathcal{S}} \mathbb{E}_{\pi} [\sum_{k=0}^\infty \gamma^k \, \mathbb{I}(s_{t+k+1}=s&#39;) \times r_{t+k+1}  | s_t =s]\\
+               &amp;\approx \sum_{s&#39; \in \mathcal{S}} \mathbb{E}_{\pi} [\sum_{k=0}^\infty \gamma^k \, \mathbb{I}(s_{t+k+1}=s&#39;)  | s_t =s] \times \mathbb{E}_{\pi} [r_{t+k+1}  | s_{t+k+1}=s&#39;]\\
+               &amp;\approx \sum_{s&#39; \in \mathcal{S}} M(s, s&#39;) \times r(s&#39;)\\
+\end{align}
+\]</span></p>
+<ul>
+<li><p>The underlying assumption is that the world dynamics are independent from the reward expectations.</p>
+<ul>
+<li><p>Allows to re-use knowledge about world dynamics in other contexts (<strong>latent learning</strong>).</p></li>
+<li><p>Not true, because the policy will visit more often the rewarding transitions, but good enough.</p></li>
+</ul></li>
+</ul>
+
+    <p class=citation>
+         Dayan, P. (1993). Improving Generalization for Temporal Difference Learning: The Successor Representation. Neural Computation 5, 613–624. doi:10.1162/neco.1993.5.4.613.
+    </p>
+    
+</section>
+<section id="successor-representations-sr-2" class="slide level1">
+<h1>Successor Representations (SR)</h1>
+<ul>
+<li><p>SR algorithms must estimate two quantities:</p>
+<ol type="1">
+<li>The <strong>expected immediate reward</strong> received after each state:</li>
+</ol>
+<p><span class="math display">\[r(s) = \mathbb{E}_{\pi} [r_{t+1} | s_t = s]\]</span></p>
+<ol start="2" type="1">
+<li>The <strong>expected discounted future state occupancy</strong> (the <strong>SR</strong> itself):</li>
+</ol>
+<p><span class="math display">\[M(s, s&#39;) = \mathbb{E}_{\pi} [\sum_{k=0}^\infty \gamma^k \, \mathbb{I}(s_{t+k+1} = s&#39;) | s_t = s]\]</span></p></li>
+<li><p>The value of a state <span class="math inline">\(s\)</span> is then computed with:</p></li>
+</ul>
+<p><span class="math display">\[
+V^\pi(s) = \sum_{s&#39; \in \mathcal{S}} M(s, s&#39;) \times r(s&#39;)
+\]</span></p>
+<p>what allows to infer the policy (e.g. using an actor-critic architecture).</p>
+<ul>
+<li>The immediate reward for a state can be estimated very quickly:</li>
+</ul>
+<p><span class="math display">\[
+    \Delta r(s) = \alpha \, (r_{t+1} - r(s))
+\]</span></p>
+</section>
+<section id="sr-and-transition-matrix" class="slide level1">
+<h1>SR and transition matrix</h1>
+<ul>
+<li>Imagine a very simple MDP with 4 states and a single deterministic action:</li>
+</ul>
+<p><img data-src="img/sr-simplemdp.svg" style="width:40.0%" /></p>
+<ul>
+<li>The transition matrix <span class="math inline">\(\mathcal{P}^\pi\)</span> depicts the possible <span class="math inline">\((s, s&#39;)\)</span> transitions:</li>
+</ul>
+<p><span class="math display">\[\mathcal{P}^\pi = \begin{bmatrix}
+0 &amp; 1 &amp; 0 &amp; 0 \\
+0 &amp; 0 &amp; 1 &amp; 0 \\
+0 &amp; 0 &amp; 0 &amp; 1 \\
+0 &amp; 0 &amp; 0 &amp; 1 \\
+\end{bmatrix}\]</span></p>
+<ul>
+<li>The SR matrix <span class="math inline">\(M\)</span> also represents the future transitions discounted by <span class="math inline">\(\gamma\)</span>:</li>
+</ul>
+<p><span class="math display">\[M = \begin{bmatrix}
+1 &amp; \gamma &amp; \gamma^2 &amp; \gamma^3 \\
+0 &amp; 1 &amp; \gamma &amp; \gamma^2 \\
+0 &amp; 0 &amp; 1  &amp; \gamma\\
+0 &amp; 0 &amp; 0 &amp; 1 \\
+\end{bmatrix}\]</span></p>
+</section>
+<section id="sr-matrix-in-a-tolmans-maze" class="slide level1">
+<h1>SR matrix in a Tolman’s maze</h1>
+    <div id="col-wrapper">
+      <div id="col">
+        <div style="width:50%; float: left;">
+<p><img data-src="img/sr-tolman.png" /></p>
+        </div>
+        <div style="width:50%; float:right;">
+<ul>
+<li><p>The SR represents whether a state can be reached from the current state (b).</p></li>
+<li><p>The SR depends on the policy:</p>
+<ul>
+<li><p>A random agent will map the local neighborhood (c).</p></li>
+<li><p>A goal-directed agent will have SR representations that follow the optimal path (d).</p></li>
+</ul></li>
+<li><p>It is therefore different from the transition matrix, as it depends on behavior and rewards.</p></li>
+<li><p>The exact dynamics are lost compared to MB: you only care whether a state is reachable, not how.</p></li>
+</ul>
+        </div>
+      </div>
+    </div>
+
+    <p class=citation>
+         Russek, E. M., Momennejad, I., Botvinick, M. M., Gershman, S. J., and Daw, N. D. (2017). Predictive representations can link model-based reinforcement learning to model-free mechanisms. PLOS Computational Biology 13, e1005768. doi:10.1371/journal.pcbi.1005768.
+    </p>
+    
+</section>
+<section id="example-of-a-sr-matrix" class="slide level1">
+<h1>Example of a SR matrix</h1>
+<ul>
+<li><p>The SR matrix reflects the proximity between states depending on the transitions and the policy.</p></li>
+<li><p>It does not have to be a spatial relationship.</p></li>
+</ul>
+    <div id="col-wrapper">
+      <div id="col">
+        <div style="width:50%; float: left;">
+<p><img data-src="img/schapiro1.png" /></p>
+        </div>
+        <div style="width:50%; float:right;">
+<p><img data-src="img/schapiro2.png" /></p>
+        </div>
+      </div>
+    </div>
+
+    <p class=citation>
+         Stachenfeld, K. L., Botvinick, M. M., and Gershman, S. J. (2017). The hippocampus as a predictive map. Nature Neuroscience 20, 1643–1653. doi:10.1038/nn.4650
+    </p>
+    
+</section>
+<section id="learning-the-sr" class="slide level1">
+<h1>Learning the SR</h1>
+<ul>
+<li>How can we learn the SR matrix for all pairs of states?</li>
+</ul>
+<p><span class="math display">\[
+    M^\pi(s, s&#39;) = \mathbb{E}_{\pi} [\sum_{k=0}^\infty \gamma^k \, \mathbb{I}(s_{t+k} = s&#39;) | s_t = s]
+\]</span></p>
+<ul>
+<li>We first notice that the SR obeys a recursive Bellman-like equation:</li>
+</ul>
+<p><span class="math display">\[\begin{aligned}
+    M^\pi(s, s&#39;) &amp;= \mathbb{I}(s_{t} = s&#39;) + \mathbb{E}_{\pi} [\sum_{k=1}^\infty \gamma^k \, \mathbb{I}(s_{t+k} = s&#39;) | s_t = s] \\
+            &amp;= \mathbb{I}(s_{t} = s&#39;) + \gamma \, \mathbb{E}_{\pi} [\sum_{k=0}^\infty \gamma^k \, \mathbb{I}(s_{t+k+1} = s&#39;) | s_t = s] \\
+            &amp;= \mathbb{I}(s_{t} = s&#39;) + \gamma \, \mathbb{E}_{s_{t+1} \sim \mathcal{P}^\pi(s&#39; | s)} [\mathbb{E}_{\pi} [\sum_{k=0}^\infty \gamma^k \, \mathbb{I}(s_{t+k} = s&#39;) | s_{t+1} = s] ]\\
+            &amp;= \mathbb{I}(s_{t} = s&#39;) + \gamma \, \mathbb{E}_{s_{t+1} \sim \mathcal{P}^\pi(s&#39; | s)} [M^\pi(s_{t+1}, s&#39;)]\\
+\end{aligned}\]</span></p>
+</section>
+<section id="model-based-sr" class="slide level1">
+<h1>Model-based SR</h1>
+<ul>
+<li>Bellman-like SR:</li>
+</ul>
+<p><span class="math display">\[M^\pi(s, s&#39;) = \mathbb{I}(s_{t} = s&#39;) + \gamma \, \mathbb{E}_{s_{t+1} \sim \mathcal{P}^\pi(s&#39; | s)} [M^\pi(s_{t+1}, s&#39;)]\]</span></p>
+<ul>
+<li>If we know the transition matrix for a fixed policy <span class="math inline">\(\pi\)</span>:</li>
+</ul>
+<p><span class="math display">\[\mathcal{P}^\pi(s, s&#39;) = \sum_a \pi(s, a) \, p(s&#39; | s, a)\]</span></p>
+<p>we can obtain the SR directly with matrix inversion as we did in <strong>dynamic programming</strong>:</p>
+<p><span class="math display">\[
+    M^\pi = I + \gamma \, \mathcal{P}^\pi \times M^\pi
+\]</span></p>
+<p>so that:</p>
+<p><span class="math display">\[
+    M^\pi = (I - \gamma \, \mathcal{P}^\pi)^{-1}
+\]</span></p>
+<ul>
+<li>This DP approach is called <strong>model-based SR</strong> (MB-SR) as it necessitates to know the environment dynamics.</li>
+</ul>
+<p><br></p>
+
+    <p class=citation>
+         Momennejad, I., Russek, E. M., Cheong, J. H., Botvinick, M. M., Daw, N. D., and Gershman, S. J. (2017). The successor representation in human reinforcement learning. Nature Human Behaviour 1, 680–692. doi:10.1038/s41562-017-0180-8.
+    </p>
+    
+</section>
+<section id="model-free-sr" class="slide level1">
+<h1>Model-free SR</h1>
+<ul>
+<li>If we do not know the transition probabilities, we simply sample a single <span class="math inline">\(s_t, s_{t+1}\)</span> transition:</li>
+</ul>
+<p><span class="math display">\[
+    M^\pi(s_t, s&#39;) \approx \mathbb{I}(s_{t} = s&#39;) + \gamma \, M^\pi(s_{t+1}, s&#39;)
+\]</span></p>
+<ul>
+<li>We can define a <strong>sensory prediction error</strong> (SPE):</li>
+</ul>
+<p><span class="math display">\[
+    \delta^\text{SR}_t = \mathbb{I}(s_{t} = s&#39;) + \gamma \, M^\pi(s_{t+1}, s&#39;) - M(s_t, s&#39;)
+\]</span></p>
+<p>that is used to update an estimate of the SR:</p>
+<p><span class="math display">\[
+    \Delta M^\pi(s_t, s&#39;) = \alpha \, \delta^\text{SR}_t
+\]</span></p>
+<ul>
+<li>This is <strong>SR-TD</strong>, using a SPE instead of RPE, which learns only from transitions but ignores rewards.</li>
+</ul>
+<p><br></p>
+
+    <p class=citation>
+         Momennejad, I., Russek, E. M., Cheong, J. H., Botvinick, M. M., Daw, N. D., and Gershman, S. J. (2017). The successor representation in human reinforcement learning. Nature Human Behaviour 1, 680–692. doi:10.1038/s41562-017-0180-8.
+    </p>
+    
+</section>
+<section id="the-sensory-prediction-error---spe" class="slide level1">
+<h1>The sensory prediction error - SPE</h1>
+<ul>
+<li>The SPE has to be applied on ALL successor states <span class="math inline">\(s&#39;\)</span> after a transition <span class="math inline">\((s_t, s_{t+1})\)</span>:</li>
+</ul>
+<p><span class="math display">\[
+    M^\pi(s_t, \mathbf{s&#39;}) = M^\pi(s_t, \mathbf{s&#39;}) + \alpha \, (\mathbb{I}(s_{t}=\mathbf{s&#39;}) + \gamma \, M^\pi(s_{t+1}, \mathbf{s&#39;}) - M(s_t, \mathbf{s&#39;}))
+\]</span></p>
+<ul>
+<li><p>Contrary to the RPE, the SPE is a <strong>vector</strong> of prediction errors, used to update one row of the SR matrix.</p></li>
+<li><p>The SPE tells how <strong>surprising</strong> a transition <span class="math inline">\(s_t \rightarrow s_{t+1}\)</span> is for the SR.</p></li>
+</ul>
+<p><img data-src="img/schapiro2.png" style="width:40.0%" /></p>
+
+    <p class=citation>
+         Stachenfeld, K. L., Botvinick, M. M., and Gershman, S. J. (2017). The hippocampus as a predictive map. Nature Neuroscience 20, 1643–1653. doi:10.1038/nn.4650
+    </p>
+    
+</section>
+<section id="successor-representations" class="slide level1">
+<h1>Successor representations</h1>
+<ul>
+<li>The SR matrix represents the <strong>expected discounted future state occupancy</strong>:</li>
+</ul>
+<p><span class="math display">\[M^\pi(s, s&#39;) = \mathbb{E}_{\pi} [\sum_{k=0}^\infty \gamma^k \, \mathbb{I}(s_{t+k} = s&#39;) | s_t = s]\]</span></p>
+<ul>
+<li>It can be learned using a TD-like SPE from single transitions:</li>
+</ul>
+<p><span class="math display">\[
+    M^\pi(s_t, \mathbf{s&#39;}) = M^\pi(s_t, \mathbf{s&#39;}) + \alpha \, (\mathbb{I}(s_{t}=\mathbf{s&#39;}) + \gamma \, M^\pi(s_{t+1}, \mathbf{s&#39;}) - M(s_t, \mathbf{s&#39;}))
+\]</span></p>
+    <div id="col-wrapper">
+      <div id="col">
+        <div style="width:60%; float: left;">
+<ul>
+<li>The immediate reward in each state can be learned <strong>independently from the policy</strong>:</li>
+</ul>
+<p><span class="math display">\[
+    \Delta \, r(s_t) = \alpha \, (r_{t+1} - r(s_t))
+\]</span></p>
+<ul>
+<li>The value <span class="math inline">\(V^\pi(s)\)</span> of a state is obtained by summing of all successor states:</li>
+</ul>
+<p><span class="math display">\[
+    V^\pi(s) = \sum_{s&#39; \in \mathcal{S}} M(s, s&#39;) \times r(s&#39;)
+\]</span></p>
+<ul>
+<li>This critic can be used to train an <strong>actor</strong> <span class="math inline">\(\pi_\theta\)</span> using regular TD learning.</li>
+</ul>
+        </div>
+        <div style="width:40%; float:right;">
+<p><img data-src="img/schapiro2.png" /></p>
+
+    <p class=citation>
+         Stachenfeld, K. L., Botvinick, M. M., and Gershman, S. J. (2017). The hippocampus as a predictive map. Nature Neuroscience 20, 1643–1653. doi:10.1038/nn.4650
+    </p>
+    
+        </div>
+      </div>
+    </div>
+</section>
+<section id="successor-representation-of-actions" class="slide level1">
+<h1>Successor representation of actions</h1>
+<ul>
+<li>Note that it is straightforward to extend the idea of SR to state-action pairs:</li>
+</ul>
+<p><span class="math display">\[M^\pi(s, a, s&#39;) = \mathbb{E}_{\pi} [\sum_{k=0}^\infty \gamma^k \, \mathbb{I}(s_{t+k} = s&#39;) | s_t = s, a_t = a]\]</span></p>
+<p>allowing to estimate Q-values:</p>
+<p><span class="math display">\[
+    Q^\pi(s, a) = \sum_{s&#39; \in \mathcal{S}} M(s, a, s&#39;) \times r(s&#39;)
+\]</span></p>
+<p>using SARSA or Q-learning-like SPEs:</p>
+<p><span class="math display">\[
+    \delta^\text{SR}_t = \mathbb{I}(s_{t} = s&#39;) + \gamma \, M^\pi(s_{t+1}, a_{t+1}, s&#39;) - M(s_t, a_{t}, s&#39;)
+\]</span></p>
+<p>depending on the choice of the next action <span class="math inline">\(a_{t+1}\)</span> (on- or off-policy).</p>
+
+    <p class=citation>
+         Russek, E. M., Momennejad, I., Botvinick, M. M., Gershman, S. J., and Daw, N. D. (2017). Predictive representations can link model-based reinforcement learning to model-free mechanisms. PLoS Computational Biology, 13, e1005768. doi:10.1371/journal.pcbi.1005768
+    </p>
+    
+</section>
+<section id="successor-features" class="slide level1">
+<h1>Successor features</h1>
+    <div id="col-wrapper">
+      <div id="col">
+        <div style="width:60%; float: left;">
+<ul>
+<li><p>The SR matrix associates each state to all others (<span class="math inline">\(N\times N\)</span> matrix):</p>
+<ul>
+<li><p>curse of dimensionality.</p></li>
+<li><p>only possible for discrete state spaces.</p></li>
+</ul></li>
+<li><p>A better idea is to describe each state <span class="math inline">\(s\)</span> by a feature vector <span class="math inline">\(\phi(s) = [\phi_i(s)]_{i=1}^d\)</span> with less dimensions than the number of states.</p></li>
+<li><p>This feature vector can be constructed or learned by an autoencoder (latent representation).</p></li>
+</ul>
+        </div>
+        <div style="width:40%; float:right;">
+<p><img data-src="img/schapiro2.png" /></p>
+        </div>
+      </div>
+    </div>
+<p><img data-src="img/SRfeatures.png" style="width:60.0%" /></p>
+
+    <p class=citation>
+         Stachenfeld, K. L., Botvinick, M. M., and Gershman, S. J. (2017). The hippocampus as a predictive map. Nature Neuroscience 20, 1643–1653. doi:10.1038/nn.4650
+    </p>
+    
+
+    <p class=citation>
+         Source: http://www.jessicayung.com/the-successor-representation-1-generalising-between-states/
+    </p>
+    
+</section>
+<section id="successor-features-1" class="slide level1">
+<h1>Successor features</h1>
+<ul>
+<li>The <strong>successor feature representation</strong> (SFR) represents the discounted probability of observing a feature <span class="math inline">\(\phi_j\)</span> after being in s.</li>
+</ul>
+<p><img data-src="img/SRfeatures.png" style="width:60.0%" /></p>
+<ul>
+<li>Instead of predicting when the agent will see a cat after being in the current state <span class="math inline">\(s\)</span>, the SFR predicts when it will see eyes, ears or whiskers independently:</li>
+</ul>
+<p><span class="math display">\[
+    M^\pi_j(s) = M^\pi(s, \phi_j) = \mathbb{E}_{\pi} [\sum_{k=0}^\infty \gamma^k \, \mathbb{I}(\phi_j(s_{t+k})) | s_t = s, a_t = a]
+\]</span></p>
+<ul>
+<li>Linear SFR (Gehring, 2015) supposes that it can be linearly approximated from the features of the current state:</li>
+</ul>
+<p><span class="math display">\[
+    M^\pi_j(s) = M^\pi(s, \phi_j) = \sum_{i=1}^d m_{i, j} \, \phi_i(s)
+\]</span></p>
+
+    <p class=citation>
+         Source: http://www.jessicayung.com/the-successor-representation-1-generalising-between-states/
+    </p>
+    
+
+    <p class=citation>
+         Gehring CA. 2015. Approximate Linear Successor Representation. Presented at the The multi-disciplinary conference on Reinforcement Learning and Decision Making (RLDM).
+    </p>
+    
+</section>
+<section id="successor-features-2" class="slide level1">
+<h1>Successor features</h1>
+<ul>
+<li>The value of a state is now defined as the sum over successor features of their immediate reward discounted by the SFR:</li>
+</ul>
+<p><span class="math display">\[
+    V^\pi(s) = \sum_{j=1}^d M^\pi_j(s) \, r(\phi_j) = \sum_{j=1}^d r(\phi_j) \, \sum_{i=1}^d m_{i, j} \, \phi_i(s)
+\]</span></p>
+<ul>
+<li><p>The SFR matrix <span class="math inline">\(M^\pi = [m_{i, j}]_{i, j}\)</span> associates each feature <span class="math inline">\(\phi_i\)</span> of the current state to all successor features <span class="math inline">\(\phi_j\)</span>.</p>
+<ul>
+<li>Knowing that I see a kitchen door in the current state, how likely will I see a food outcome in the near future?</li>
+</ul></li>
+<li><p>Each successor feature <span class="math inline">\(\phi_j\)</span> is associated to an expected immediate reward <span class="math inline">\(r(\phi_j)\)</span>.</p>
+<ul>
+<li>A good state is a state where food features (high <span class="math inline">\(r(\phi_j)\)</span>) are likely to happen soon (high <span class="math inline">\(m_{i, j}\)</span>).</li>
+</ul></li>
+<li><p>In matrix-vector form:</p></li>
+</ul>
+<p><span class="math display">\[
+    V^\pi(s) = \mathbf{r}^T \times M^\pi \times \phi(s)
+\]</span></p>
+
+    <p class=citation>
+         Gehring CA. 2015. Approximate Linear Successor Representation. Presented at the The multi-disciplinary conference on Reinforcement Learning and Decision Making (RLDM).
+    </p>
+    
+</section>
+<section id="successor-features-3" class="slide level1">
+<h1>Successor features</h1>
+<ul>
+<li>Value of a state:</li>
+</ul>
+<p><span class="math display">\[
+    V^\pi(s) = \mathbf{r}^T \times M^\pi \times \phi(s)
+\]</span></p>
+<ul>
+<li><p>The reward vector <span class="math inline">\(\mathbf{r}\)</span> only depends on the features and can be learned independently from the policy, but can be made context-dependent:</p>
+<ul>
+<li>Food features can be made more important when the agent is hungry, less when thirsty.</li>
+</ul></li>
+<li><p><strong>Latent learning</strong> becomes possible in the same environment:</p>
+<ul>
+<li><p>Different goals (searching for food or water, going to place A or B) only require different reward vectors.</p></li>
+<li><p>The dynamics of the environment are stored in the SFR.</p></li>
+</ul></li>
+</ul>
+<p><img data-src="img/sr-transferlearning.png" style="width:60.0%" /></p>
+
+    <p class=citation>
+         Source: https://awjuliani.medium.com/the-present-in-terms-of-the-future-successor-representations-in-reinforcement-learning-316b78c5fa3
+    </p>
+    
+
+    <p class=citation>
+         Gehring CA. 2015. Approximate Linear Successor Representation. Presented at the The multi-disciplinary conference on Reinforcement Learning and Decision Making (RLDM).
+    </p>
+    
+<!--
+
+# Successor features
+
+* How can we learn the SFR matrix $M^\pi$?
+
+$$
+    V^\pi(s) = \mathbf{r}^T \times M^\pi \times \phi(s)
+$$
+
+* We only need to use the sensory prediction error for a transition between the feature vectors $\phi(s_t)$ and $\phi(s_{t+1})$:
+
+$$\delta_t^\text{SFR} = \phi(s_t) + \gamma \, M^\pi \times \phi(s_{t+1}) - M^\pi \times \phi(s_t)$$
+
+and use it to update the whole matrix:
+
+
+$$\Delta M^\pi = \delta_t^\text{SFR} \times \phi(s_t)^T$$
+
+
+* However, this linear approximation scheme only works for **fixed** feature representation $\phi(s)$. We need to go deeper...
+
+<br>
+
+[citation Gehring CA. 2015. Approximate Linear Successor Representation. Presented at the The multi-disciplinary conference on Reinforcement Learning and Decision Making (RLDM).]
+
+-->
+</section>
+<section id="deep-successor-reinforcement-learning" class="slide level1">
+<h1>Deep Successor Reinforcement Learning</h1>
+<p><img data-src="img/DSR.png" /></p>
+
+    <p class=citation>
+         Kulkarni, T. D., Saeedi, A., Gautam, S., and Gershman, S. J. (2016). Deep Successor Reinforcement Learning. arXiv:1606.02396
+    </p>
+    
+</section>
+<section id="visual-semantic-planning-using-deep-successor-representations" class="slide level1">
+<h1>Visual Semantic Planning using Deep Successor Representations</h1>
+<iframe width="800" height="500" src="https://www.youtube.com/embed/_2pYVw6ATKo" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+</iframe>
+
+    <p class=citation>
+         Zhu Y, Gordon D, Kolve E, Fox D, Fei-Fei L, Gupta A, Mottaghi R, Farhadi A. (2017). Visual Semantic Planning using Deep Successor Representations. arXiv:170508080
+    </p>
+    
+</section>
+<section id="neurobiological-support-for-the-sr-hypothesis" class="slide level1">
+<h1>3 - Neurobiological support for the SR hypothesis</h1>
+</section>
+<section class="slide level1">
+
+<p><img data-src="img/paper-stachenfeld.png" /></p>
+</section>
+<section id="the-hippocampus-as-a-predictive-map" class="slide level1">
+<h1>The hippocampus as a predictive map</h1>
+    <div id="col-wrapper">
+      <div id="col">
+        <div style="width:50%; float: left;">
+<p><img data-src="img/placecells.jpg" /></p>
+        </div>
+        <div style="width:50%; float:right;">
+<ul>
+<li><p>The main prediction of the SR hypothesis is that the hippocampus encode the SR.</p></li>
+<li><p>In navigation tasks, each place cell does not encode the position of the rat relative to a preferred position:</p></li>
+</ul>
+<p><span class="math display">\[
+    RF_i(x) = \exp^{- ||x - c_i ||^2}
+\]</span></p>
+<p>but rather the SR between the current position and the place field center:</p>
+<p><span class="math display">\[
+    RF_i(x) = \mathbb{E}_{\pi} [\sum_{k=0}^\infty \gamma^k \, \mathbb{I}(s_{t+k+1} = c_i) | s_t = x]
+\]</span></p>
+        </div>
+      </div>
+    </div>
+<ul>
+<li>Place fields are now behavior-dependent and reward-dependent: they predict where the rat can go.</li>
+</ul>
+<p><br></p>
+
+    <p class=citation>
+         Stachenfeld, K. L., Botvinick, M. M., and Gershman, S. J. (2017). The hippocampus as a predictive map. Nature Neuroscience 20, 1643–1653. doi:10.1038/nn.4650.
+    </p>
+    
+</section>
+<section id="the-hippocampus-as-a-predictive-map-1" class="slide level1">
+<h1>The hippocampus as a predictive map</h1>
+    <div id="col-wrapper">
+      <div id="col">
+        <div style="width:50%; float: left;">
+<ul>
+<li>The SR hypothesis explains how the place fields deform around walls or obstacles.</li>
+</ul>
+<p><img data-src="img/sr_rat1.png" /></p>
+        </div>
+        <div style="width:50%; float:right;">
+<p><img data-src="img/sr_rat2.png" /></p>
+        </div>
+      </div>
+    </div>
+
+    <p class=citation>
+         Stachenfeld, K. L., Botvinick, M. M., and Gershman, S. J. (2017). The hippocampus as a predictive map. Nature Neuroscience 20, 1643–1653. doi:10.1038/nn.4650.
+    </p>
+    
+</section>
+<section id="the-hippocampus-as-a-predictive-map-2" class="slide level1">
+<h1>The hippocampus as a predictive map</h1>
+<ul>
+<li>The SR hypothesis predicts how place fields skew around obstacles and depend on the direction of movement.</li>
+</ul>
+<p><img data-src="img/sr_rat3.png" /></p>
+
+    <p class=citation>
+         Stachenfeld, K. L., Botvinick, M. M., and Gershman, S. J. (2017). The hippocampus as a predictive map. Nature Neuroscience 20, 1643–1653. doi:10.1038/nn.4650.
+    </p>
+    
+</section>
+<section id="grid-cells-as-eigenvectors-of-the-place-cells" class="slide level1">
+<h1>Grid cells as eigenvectors of the place cells</h1>
+<ul>
+<li><p>Grid cells in the neotrhinal cortex are an eigendecomposition of the SR place cells, showing a spatially periodic structure.</p></li>
+<li><p>The SR predicts correctly that the grids align with the environment boundaries and adapt to different shapes.</p></li>
+</ul>
+    <div id="col-wrapper">
+      <div id="col">
+        <div style="width:50%; float: left;">
+<p><img data-src="img/gridcells1.png" /></p>
+        </div>
+        <div style="width:50%; float:right;">
+<p><img data-src="img/gridcells2.png" /></p>
+        </div>
+      </div>
+    </div>
+
+    <p class=citation>
+         Stachenfeld, K. L., Botvinick, M. M., and Gershman, S. J. (2017). The hippocampus as a predictive map. Nature Neuroscience 20, 1643–1653. doi:10.1038/nn.4650.
+    </p>
+    
+</section>
+<section class="slide level1">
+
+<p><img data-src="img/Schapiro-SR.png" /></p>
+</section>
+<section class="slide level1">
+
+<p><img data-src="img/paper-garvert.png" /></p>
+</section>
+<section id="a-map-of-abstract-relational-knowledge-in-the-human-hippocampalentorhinal-cortex" class="slide level1">
+<h1>A map of abstract relational knowledge in the human hippocampal–entorhinal cortex</h1>
+<p><img data-src="img/garvert-task.jpg" /></p>
+
+    <p class=citation>
+         Garvert, M. M., Dolan, R. J., and Behrens, T. E. (2017). A map of abstract relational knowledge in the human hippocampal–entorhinal cortex. eLife 6, e17086. doi:10.7554/eLife.17086.
+    </p>
+    
+</section>
+<section id="a-map-of-abstract-relational-knowledge-in-the-human-hippocampalentorhinal-cortex-1" class="slide level1">
+<h1>A map of abstract relational knowledge in the human hippocampal–entorhinal cortex</h1>
+<p><img data-src="img/garvert-results.jpg" style="width:60.0%" /></p>
+
+    <p class=citation>
+         Garvert, M. M., Dolan, R. J., and Behrens, T. E. (2017). A map of abstract relational knowledge in the human hippocampal–entorhinal cortex. eLife 6, e17086. doi:10.7554/eLife.17086.
+    </p>
+    
+</section>
+<section id="a-map-of-abstract-relational-knowledge-in-the-human-hippocampalentorhinal-cortex-2" class="slide level1">
+<h1>A map of abstract relational knowledge in the human hippocampal–entorhinal cortex</h1>
+    <div id="col-wrapper">
+      <div id="col">
+        <div style="width:50%; float: left;">
+<p><img data-src="img/garvert-results2.jpg" /></p>
+        </div>
+        <div style="width:50%; float:right;">
+<ul>
+<li><p>Entorhinal representations follow the map structure of the latent learning task.</p></li>
+<li><p>Representations are a weighted sum of future states, confirming the SR hypothesis.</p></li>
+</ul>
+<p><img data-src="img/garvert-results3.jpg" /></p>
+        </div>
+      </div>
+    </div>
+
+    <p class=citation>
+         Garvert, M. M., Dolan, R. J., and Behrens, T. E. (2017). A map of abstract relational knowledge in the human hippocampal–entorhinal cortex. eLife 6, e17086. doi:10.7554/eLife.17086.
+    </p>
+    
+</section>
+<section class="slide level1">
+
+<p><img data-src="img/paper-momennejad.png" /></p>
+</section>
+<section id="the-successor-representation-in-human-reinforcement-learning" class="slide level1">
+<h1>The successor representation in human reinforcement learning</h1>
+<ul>
+<li>Human RL can be studied in simple two-step tasks and re-learning either the reward expectations or the transition probabilities.</li>
+</ul>
+    <div id="col-wrapper">
+      <div id="col">
+        <div style="width:70%; float: left;">
+<p><img data-src="img/mommenejad-task.png" /></p>
+        </div>
+        <div style="width:30%; float:right;">
+<p><img data-src="img/momennejad-prediction.png" /></p>
+<p><img data-src="img/momennejad-prediction2.png" /></p>
+        </div>
+      </div>
+    </div>
+
+    <p class=citation>
+         Momennejad, I., Russek, E. M., Cheong, J. H., Botvinick, M. M., Daw, N. D., and Gershman, S. J. (2017). The successor representation in human reinforcement learning. Nature Human Behaviour 1, 680–692. doi:10.1038/s41562-017-0180-8.
+    </p>
+    
+</section>
+<section id="the-successor-representation-in-human-reinforcement-learning-1" class="slide level1">
+<h1>The successor representation in human reinforcement learning</h1>
+<ul>
+<li>Human RL behavior is best explained by a linear combination of MB and SR processes.</li>
+</ul>
+<p><img data-src="img/momennejad-results.png" /></p>
+
+    <p class=citation>
+         Momennejad, I., Russek, E. M., Cheong, J. H., Botvinick, M. M., Daw, N. D., and Gershman, S. J. (2017). The successor representation in human reinforcement learning. Nature Human Behaviour 1, 680–692. doi:10.1038/s41562-017-0180-8.
+    </p>
+    
+</section>
+<section id="probabilistic-successor-representations-with-kalman-temporal-differences" class="slide level1">
+<h1>Probabilistic Successor Representations with Kalman Temporal Differences</h1>
+    <div id="col-wrapper">
+      <div id="col">
+        <div style="width:50%; float: left;">
+<ul>
+<li>You can get rid of the hybrid SR mechanism if you add <strong>uncertainty estimation</strong> of state representations using Kalman filters.</li>
+</ul>
+<p><img data-src="img/geerts-kalman-algo.png" /></p>
+        </div>
+        <div style="width:50%; float:right;">
+<p><img data-src="img/geerts-kalman.png" /></p>
+        </div>
+      </div>
+    </div>
+
+    <p class=citation>
+         Geerts, J. P., Stachenfeld, K. L., and Burgess, N. (2019). Probabilistic Successor Representations with Kalman Temporal Differences. 2019 Conference on Cognitive Computational Neuroscience. doi:10.32470/CCN.2019.1323-0.
+    </p>
+    
+</section>
+<section class="slide level1">
+
+<p><img data-src="img/paper-geerts.png" /></p>
+</section>
+<section id="a-general-model-of-hippocampal-and-dorsal-striatal-learning-and-decision-making" class="slide level1">
+<h1>A general model of hippocampal and dorsal striatal learning and decision making</h1>
+<p><img data-src="img/geerts-arbitration.jpg" /></p>
+
+    <p class=citation>
+         Geerts, J. P., Chersi, F., Stachenfeld, K. L., and Burgess, N. (2020). A general model of hippocampal and dorsal striatal learning and decision making. PNAS 117, 31427–31437. doi:10.1073/pnas.2007981117.
+    </p>
+    
+</section>
+<section id="a-general-model-of-hippocampal-and-dorsal-striatal-learning-and-decision-making-1" class="slide level1">
+<h1>A general model of hippocampal and dorsal striatal learning and decision making</h1>
+<p><img data-src="img/geerts-arbitration-results1.jpg" /></p>
+
+    <p class=citation>
+         Geerts, J. P., Chersi, F., Stachenfeld, K. L., and Burgess, N. (2020). A general model of hippocampal and dorsal striatal learning and decision making. PNAS 117, 31427–31437. doi:10.1073/pnas.2007981117.
+    </p>
+    
+</section>
+<section id="a-general-model-of-hippocampal-and-dorsal-striatal-learning-and-decision-making-2" class="slide level1">
+<h1>A general model of hippocampal and dorsal striatal learning and decision making</h1>
+<p><img data-src="img/geerts-arbitration-results2.jpg" /></p>
+
+    <p class=citation>
+         Geerts, J. P., Chersi, F., Stachenfeld, K. L., and Burgess, N. (2020). A general model of hippocampal and dorsal striatal learning and decision making. PNAS 117, 31427–31437. doi:10.1073/pnas.2007981117.
+    </p>
+    
+</section>
+<section id="a-general-model-of-hippocampal-and-dorsal-striatal-learning-and-decision-making-3" class="slide level1">
+<h1>A general model of hippocampal and dorsal striatal learning and decision making</h1>
+<p><img data-src="img/geerts-arbitration-results3.jpg" style="width:70.0%" /></p>
+<p><img data-src="img/geerts-arbitration-results4.jpg" style="width:70.0%" /></p>
+
+    <p class=citation>
+         Geerts, J. P., Chersi, F., Stachenfeld, K. L., and Burgess, N. (2020). A general model of hippocampal and dorsal striatal learning and decision making. PNAS 117, 31427–31437. doi:10.1073/pnas.2007981117.
+    </p>
+    
+</section>
+<section class="slide level1">
+
+<p><img data-src="img/paper-momennejad2.png" /></p>
+</section>
+<section id="multi-scale-successor-representations" class="slide level1">
+<h1>Multi-scale successor representations</h1>
+    <div id="col-wrapper">
+      <div id="col">
+        <div style="width:50%; float: left;">
+<ul>
+<li>A critical parameter of SR is <span class="math inline">\(\gamma\)</span>, the discount rate determining how important are future states for the current state.</li>
+</ul>
+<p><span class="math display">\[M^\pi(s, s&#39;) = \mathbb{E}_{\pi} [\sum_{k=0}^\infty \gamma^k \, \mathbb{I}(s_{t+k} = s&#39;) | s_t = s]\]</span></p>
+<ul>
+<li><p>Having SR representations at different horizons allows to represent temporal relationships at <strong>different scales</strong>.</p></li>
+<li><p>It can form the basis of <strong>hierarchical RL</strong>.</p></li>
+<li><p>There is indeed a ventro-dorsal gradient of the size of the place fields in the hippocampus.</p></li>
+</ul>
+        </div>
+        <div style="width:50%; float:right;">
+<p><img data-src="img/momennejad-hierarchical.png" /></p>
+        </div>
+      </div>
+    </div>
+
+    <p class=citation>
+         Momennejad, I. (2020). Learning Structures: Predictive Representations, Replay, and Generalization. Current Opinion in Behavioral Sciences 32, 155–166. doi:10.1016/j.cobeha.2020.02.017.
+    </p>
+    
+</section>
+<section id="multi-scale-successor-representations-1" class="slide level1">
+<h1>Multi-scale successor representations</h1>
+<ul>
+<li><p>It is furthermore possible to decode the <strong>distance to a goal</strong> based on multi-scale SR representations.</p></li>
+<li><p>A neurally plausible linear operation, namely the inverse of the Laplace transform, can be used to compute the derivative of multi-scale SR and obtain an estimation of the distance to a goal.</p></li>
+</ul>
+    <div id="col-wrapper">
+      <div id="col">
+        <div style="width:50%; float: left;">
+<p><img data-src="img/momennejad-distance.png" /></p>
+        </div>
+        <div style="width:50%; float:right;">
+<p><img data-src="img/momennejad-distance2.png" /></p>
+        </div>
+      </div>
+    </div>
+
+    <p class=citation>
+         Momennejad, I., and Howard, M. W. (2018). Predicting the future with multi-scale successor representations. bioRxiv, 449470. doi:10.1101/449470.
+    </p>
+    
+</section>
+<section id="discussion" class="slide level1">
+<h1>4 - Discussion</h1>
+</section>
+<section id="successor-representations-and-cognition" class="slide level1">
+<h1>Successor representations and cognition</h1>
+<ul>
+<li><p>The SR can explain hippocampal activity in both spatial (place cells) and non-spatial cognitive tasks.</p></li>
+<li><p>It realizes a trade-off between model-free and model-based learning, and can be combined with those two approaches to explain human reinforcement learning and spatial navigation strategies.</p></li>
+<li><p>There is not yet a realistic neuro-computational model that uses successor representations (ongoing work with Simon Schaal).</p></li>
+</ul>
+</section>
+<section id="can-vta-encode-the-spe" class="slide level1">
+<h1>Can VTA encode the SPE?</h1>
+    <div id="col-wrapper">
+      <div id="col">
+        <div style="width:70%; float: left;">
+<p><img data-src="img/watabe.png" /></p>
+        </div>
+        <div style="width:30%; float:right;">
+<ul>
+<li><p>The SPE is a vector over all relevant task features.</p></li>
+<li><p>VTA only responds to reward magnitude / probability, it is not feature-specific.</p></li>
+<li><p>Some VTA neurons projecting to the tail of the striatum react for punishments (threat prediction error), but that is all.</p></li>
+</ul>
+        </div>
+      </div>
+    </div>
+
+    <p class=citation>
+         Watabe-Uchida, M., and Uchida, N. (2019). Multiple Dopamine Systems: Weal and Woe of Dopamine. Cold Spring Harb Symp Quant Biol, 037648. doi:10.1101/sqb.2018.83.037648.
+    </p>
+    
+</section>
+<section id="feature-specific-prediction-errors-and-surprise-across-macaque-fronto-striatal-circuits" class="slide level1">
+<h1>Feature-specific prediction errors and surprise across macaque fronto-striatal circuits</h1>
+<p><img data-src="img/oemisch.png" /></p>
+
+    <p class=citation>
+         Oemisch, M., Westendorff, S., Azimi, M., Hassani, S. A., Ardid, S., Tiesinga, P., et al. (2019). Feature-specific prediction errors and surprise across macaque fronto-striatal circuits. Nature Communications 10, 176. doi:10.1038/s41467-018-08184-9.
+    </p>
+    
+</section>
+<section id="sharp-wave-ripples-to-access-and-learn-the-sr" class="slide level1">
+<h1>Sharp Wave Ripples to access and learn the SR ?</h1>
+<p><img data-src="img/swr.jpg" /></p>
+</section>
+<section class="slide level1">
+
+<video src="img/prospectiveencoding.webm" style="display:block; margin: 0 auto 10px 10px; width: 800px" controls allow="autoplay loop">
+</video>
+
+    <p class=citation>
+         Johnson, A., and Redish, A. D. (2007). Neural Ensembles in CA3 Transiently Encode Paths Forward of the Animal at a Decision Point. J. Neurosci. 27, 12176–12189. doi:10.1523/JNEUROSCI.3761-07.2007.
+    </p>
+    
 </section>
     </div>
   </div>
